@@ -1,0 +1,47 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+.env/
+.envrc
+.pip-cache/
+*.egg-info/
+*.egg
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Logs and debugging
+logs/
+debug.log
+*.log
+
+# TensorBoard logs
+events.out.tfevents.*
+
+# YOLO-specific
+models/yolo11m.pt
+results/
+runs/
+labels.cache
+*.engine
+*.trt
+*.txt
+*.yaml
+
+# IDE and editor files
+.vscode/
+.idea/
+*.iml
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Ignore datasets files
+datasets/raw_data
+*.zip
