@@ -31,7 +31,6 @@ labels.cache
 *.engine
 *.trt
 *.txt
-*.yaml
 
 # IDE and editor files
 .vscode/
