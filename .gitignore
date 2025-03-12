@@ -27,10 +27,7 @@ events.out.tfevents.*
 models/yolo11m.pt
 results/
 runs/
-labels.cache
 *.engine
-*.trt
-*.txt
 
 # IDE and editor files
 .vscode/
