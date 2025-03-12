@@ -1,5 +1,6 @@
-📌 Cooking Tools Recognition
+### 🥘Cooking Tools Recognition
 Project: Cooking Tools Recognition
+
 GPU Used: NVIDIA GTX 1650
 
 📖 Table of Contents
