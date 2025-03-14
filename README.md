@@ -64,10 +64,8 @@ train: datasets/train/images
 val: datasets/valid/images
 test: datasets/test/images
 
-nc: 16  # Number of classes
-names: 
-['bottle', 'bowl', 'cup', 'cutting board', 'fork', 'fullbottle', 'fullbowl', 
-'fullcup', 'fullpan', 'fullpot', 'knife', 'pan', 'plate', 'pot', 'spoon', 'whisk']
+nc: 2  # Number of classes the model can regconize
+names: ['Fork', 'Spoon']
 ```
 🎯 4. Training the Model
 Start Training (Optimized for GTX 1650)
@@ -78,52 +76,22 @@ if __name__ == "__main__":
     model = YOLO("yolo11m.pt")  # Use a lightweight model for better performance
 
     model.train(
-        data="datasets/data.yaml",  # Path to dataset
-        epochs=250,                 # Number of training epochs
-        batch=2,                    # Reduce batch size to avoid OOM issues
-        imgsz=416,                  # Smaller image size for faster training
-        device="cuda",              # Use GPU
-        lr0=0.005,                  # Learning rate
-        workers=0,                  # Prevents multi-threading issues on Windows
-        pretrained=True,            # Use pre-trained weights
-        half=True                   # Enable mixed precision for better memory usage
+        data="datasets/data.yaml",  # Dataset configuration file
+        epochs=150,                 # Reduce epochs if convergence is fast
+        batch=6,                    # Increase batch size if VRAM allows
+        imgsz=416,                  # Reduce image size for faster processing
+        device="cuda",               # Use GPU
+        lr0=0.003,                   # Slightly higher learning rate for quicker convergence
+        workers=2,                    # Increase workers for data loading speed
+        pretrained=True,             # Use pretrained weights
+        augment=False,               # Disable heavy augmentations
+        cache=False,                 # Disable caching to save memory
+        half=True,                    # Use FP16 for faster computation
+        dropout=0.05,                 # Reduce dropout slightly
+        patience=20                   # Reduce patience to speed up early stopping
     )
 ```
 Estimated training time: ~2-4 minutes per epoch.
-
-📊 5. Evaluating Model Performance
-After training, evaluate your model using:
-
-```python
-model.val()
-```
-This provides mAP, precision, recall, and other metrics.
-
-🔍 6. Running Inference
-Detect Objects in an Image
-```python
-results = model("test_image.jpg", save=True, imgsz=416)
-```
-⚡ 7. Optimizations for GTX 1650
-✅ Best Settings for Training on Low-VRAM GPU
-Parameter	Recommended Value
-Model	yolo11m.pt (Nano)
-Batch Size	batch=2 (Reduce if OOM occurs)
-Image Size	imgsz=416
-Workers	workers=0 (Avoids CPU thread issues)
-Mixed Precision	half=True (Reduces VRAM usage)
-🔥 Additional Speed Optimizations
-Reduce batch size → If OOM occurs, use batch=1.
-Lower image size → imgsz=320 instead of 416.
-Disable augmented training → Remove augment=True if memory issues occur.
-Use CPU if necessary → device="cpu" if GPU crashes.
-❌ 8. Troubleshooting
-🔹 Out of Memory (OOM) Error
-Solution: Reduce batch=1, lower imgsz=320, and enable half=True.
-🔹 Training is Slow
-Solution: Use yolo11m.pt instead of YOLOm.pt. Reduce dataset size for faster training.
-🔹 Model Doesn't Detect Objects
-Solution: Ensure labels are correctly formatted in YOLO format (.txt files with class x y w h).
 
 🚀 Running the Scripts
 To train the model, run:

@@ -2,12 +2,12 @@ train: ../train/images
 val: ../valid/images
 test: ../test/images
 
-nc: 16
-names: ['bottle', 'bowl', 'cup', 'cutting board', 'fork', 'fullbottle', 'fullbowl', 'fullcup', 'fullpan', 'fullpot', 'knife', 'pan', 'plate', 'pot', 'spoon', 'whisk']
+nc: 2
+names: ['Fork', 'Spoon']
 
 roboflow:
-  workspace: university-of-tehran-ddjod
-  project: kitchen-objectsv0
+  workspace: tark-cucun
+  project: fork-vs-spoon-v1
   version: 5
-  license: Public Domain
-  url: https://universe.roboflow.com/university-of-tehran-ddjod/kitchen-objectsv0/dataset/5
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/tark-cucun/fork-vs-spoon-v1/dataset/5

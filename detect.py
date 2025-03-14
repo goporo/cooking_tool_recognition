@@ -4,11 +4,12 @@ from ultralytics import YOLO
 from collections import Counter
 import os
 
-CONFIDENCE_THRESHOLD = 0.25
-def detect_and_count(image_path, model_path="models/kitchen_utensils_v1.pt", conf_threshold=CONFIDENCE_THRESHOLD):
+CONFIDENCE_THRESHOLD = 0.5
+MODEL_PATH = "runs/detect/train5/weights/best.pt"
+# MODEL_PATH = "models/kitchen_utensils_v1.pt"
+def detect_and_count(image_path, model_path=MODEL_PATH, conf_threshold=CONFIDENCE_THRESHOLD):
     # If you want to use the best weights from training, use the following line
-    # model = YOLO("runs/detect/train2/weights/best.pt")
-    model = YOLO(model_path)  
+    model = YOLO(model_path)
 
     image = cv2.imread(image_path)
     if image is None:
@@ -37,7 +38,7 @@ def detect_and_count(image_path, model_path="models/kitchen_utensils_v1.pt", con
 
     return image, object_counts
 
-def process_images(test_path="test/", model_path="models/yolo11m.pt", conf_threshold=CONFIDENCE_THRESHOLD):
+def process_images(test_path="test/", model_path=MODEL_PATH, conf_threshold=CONFIDENCE_THRESHOLD):
     os.makedirs("output", exist_ok=True)
     
     print("Processing test images...")
